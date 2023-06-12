@@ -1,0 +1,26 @@
+.layout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 70px;
+  height: 70px;
+  border: 8px solid #e50914;
+  border-top: 8px solid transparent;
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+}

@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Description
 
-A Netflix Web App Clone is built with React, TailwindCSS, TypeScript and Firebase/Firestore.
+A Netflix Web App Clone is built with ReactJS, TailwindCSS, TypeScript, Firebase/Cloud Firestore and TMDB API.
 
 ## Functionality
 - Signup / Login

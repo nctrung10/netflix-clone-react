@@ -16,4 +16,4 @@ A Netflix Web App Clone is built with ReactJS, TailwindCSS, TypeScript, Firebase
 - Watch movies
 
 #
-Visit the page: https://netflix-react-ts-1099.web.app/
+Visit the page: https://netflix-clone-react-red.vercel.app

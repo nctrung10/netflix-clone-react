@@ -6,11 +6,9 @@ type PropsType = {
 
 const Account = ({ onOpenModal }: PropsType) => {
   return (
-    <>
-      <div className="w-full mt-24 mb-8">
-        <SavedMovies onOpen={onOpenModal} />
-      </div>
-    </>
+    <div className="w-full mt-24 mb-8">
+      <SavedMovies onOpen={onOpenModal} />
+    </div>
   );
 };
 

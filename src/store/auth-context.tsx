@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
 import { auth, db } from "../firebase";
 import {
@@ -19,12 +19,16 @@ type ContextType = {
   logOut: () => void;
 };
 
-export const AuthContext = createContext<ContextType>({
+const AuthContext = createContext<ContextType>({
   user: null,
-  signUp: () => {},
-  signIn: () => {},
+  signUp: (email, password) => {},
+  signIn: (email, password) => {},
   logOut: () => {}
 });
+
+export function UserAuth() {
+  return useContext(AuthContext);
+}
 
 // Context Provider
 type ContextProvider = {

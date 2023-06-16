@@ -1,8 +1,8 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FaPlus, FaCheck } from 'react-icons/fa';
 import { MovieType, SavedMovieType } from '../models/movie';
-import { AuthContext } from '../store/auth-context';
+import { UserAuth } from '../store/auth-context';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 
@@ -15,11 +15,9 @@ const Movie = ({ item, onOpen }: PropsType) => {
   const [loading, setLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState<SavedMovieType[]>([]);
   const [like, setLike] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = UserAuth();
 
   const movieRef = doc(db, 'users', `${user?.email}`);
-
-  // console.log(savedMovies);
 
   // Show movies that is added into the list
   useEffect(() => {
@@ -35,7 +33,6 @@ const Movie = ({ item, onOpen }: PropsType) => {
         setLike(prev => !prev);
       }
     });
-    // console.log('re-render');
   }, [savedMovies, item.id]);
 
   // Handling add/remove movie from the list

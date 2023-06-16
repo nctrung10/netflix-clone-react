@@ -31,7 +31,7 @@ const WatchPage = () => {
 
   return (
     <div className="w-screen h-screen my-auto md:w-screen md:h-screen bg-black">
-      <nav className="fixed w-full p-4 z-10 flex flex-grow items-center gap-8 bg-black/95">
+      <nav className="fixed w-full p-4 z-[999] flex flex-grow items-center gap-8 bg-black/95">
         <Link to="/">
           <AiOutlineArrowLeft className="text-white" size={40} />
         </Link>

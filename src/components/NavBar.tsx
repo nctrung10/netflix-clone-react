@@ -1,12 +1,12 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 
-import { AuthContext } from "../store/auth-context";
+import { UserAuth } from "../store/auth-context";
 import { MdArrowDropDown } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = UserAuth();
   const navigate = useNavigate();
   const navbarRef = useRef<HTMLDivElement>(null);
 
@@ -29,26 +29,24 @@ const NavBar = () => {
   );
 
   const userButtons = (
-    <>
-      <div className="flex items-center cursor-pointer group relative pl-3">
-        <FaUser className="text-xl mr-2" />
-        <MdArrowDropDown className="scale-150" />
+    <div className="flex items-center cursor-pointer group relative pl-3">
+      <FaUser className="text-xl mr-2" />
+      <MdArrowDropDown className="scale-150" />
 
-        <div className="absolute top-8 right-0 w-[180px] rounded hidden group-hover:flex flex-col items-center 
+      <div className="absolute top-8 right-0 w-[180px] rounded hidden group-hover:flex flex-col items-center 
         bg-black text-white/70 font-semibold text-sm">
-          <span className="block absolute -top-3 w-full h-4" aria-hidden="true"></span>
-          <Link to='/account'>
-            <button className="py-4">
-              <p className="text-xs mb-1">{user?.email}</p>
-              Account
-            </button>
-          </Link>
-          <button className="hover:text-red-500 py-4 w-full border-t" onClick={logoutHandler}>
-            Sign out of Netflix
+        <span className="block absolute -top-3 w-full h-4" aria-hidden="true"></span>
+        <Link to='/account'>
+          <button className="py-4">
+            <p className="text-xs mb-1">{user?.email}</p>
+            Account
           </button>
-        </div>
+        </Link>
+        <button className="hover:text-red-500 py-4 w-full border-t" onClick={logoutHandler}>
+          Sign out of Netflix
+        </button>
       </div>
-    </>
+    </div>
   );
 
   // Detecing the direction of the scroll page

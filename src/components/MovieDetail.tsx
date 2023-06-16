@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from "axios";
 import { AiFillLike, AiOutlineClose } from "react-icons/ai";
@@ -6,10 +7,9 @@ import { FaCheck, FaPlus } from "react-icons/fa";
 import { MdPlayArrow } from "react-icons/md";
 import { MovieType, SavedMovieType } from '../models/movie';
 import Modal from "./UI/Modal";
-import { AuthContext } from '../store/auth-context';
+import { UserAuth } from '../store/auth-context';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc, onSnapshot } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
 
 type PropsType = {
   movie?: MovieType;
@@ -26,7 +26,7 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
   const [showMore, setShowMore] = useState(false);
   const [moviesInList, setMoviesInList] = useState<SavedMovieType[]>([]);
   const [like, setLike] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = UserAuth();
 
   // Only use the (last) trailer video of movie
   const trailerVideos: any = [];
@@ -121,17 +121,21 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
   const infoMovie = (
     <>
       <h1 className="text-lg sm:text-xl mb-2 font-bold">{movie?.title}</h1>
-      <div>
-        {movie!.release_date.slice(0, 7) >= '2023-04' && <span className="mr-2 text-green-600">New</span>}
-        <span>{movie?.release_date}</span>
-        {movie?.adult
-          ? <span className="ml-2 p-1 text-[11px] bg-white/20 rounded-sm">18+</span>
-          : <span className="ml-2 p-1 text-[11px] bg-white/20 rounded-sm">16+</span>
-        }
-        <span className="ml-2">{runtime > 0 && `${Math.floor(runtime / 60)}h${runtime % 60}m`}</span>
-        {genres.map(item => (
-          <span key={item.id} className="ml-2 text-xs text-white/50 pr-2 border-r last:border-none">{item.name}</span>
-        ))}
+      <div className="flex flex-col sm:flex-row w-full">
+        <div className="mb-1 sm:mb-0">
+          {movie!.release_date.slice(0, 7) >= '2023-04' && <span className="mr-2 text-green-600">New</span>}
+          <span>{movie?.release_date}</span>
+          {movie?.adult
+            ? <span className="ml-2 p-1 text-[11px] bg-white/20 rounded-sm">18+</span>
+            : <span className="ml-2 p-1 text-[11px] bg-white/20 rounded-sm">16+</span>
+          }
+          <span className="mx-2">{runtime > 0 && `${Math.floor(runtime / 60)}h${runtime % 60}m`}</span>
+        </div>
+        <div>
+          {genres.map(item => (
+            <span key={item.id} className="text-xs text-white/50 px-2 first:pl-0 border-r border-white/50 last:border-none">{item.name}</span>
+          ))}
+        </div>
       </div>
       {movie!.vote_average > 8 && (
         <div className="flex items-center mt-2">
@@ -192,7 +196,7 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
         </div>
       </div>
 
-      <div className="p-4 sm:p-6 w-full h-[400px] lg:h-[260px] overflow-y-scroll scroll-smooth scrollbar-hide">
+      <div className="p-4 sm:p-6 w-full h-[420px] lg:h-[260px] overflow-y-scroll scroll-smooth scrollbar-hide">
         <div className="mb-5 text-white/95 text-sm">
           {!loading && infoMovie}
         </div>

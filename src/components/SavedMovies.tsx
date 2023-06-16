@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 
 import { db } from '../firebase';
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { AiOutlineClose } from 'react-icons/ai'
-import { AuthContext } from '../store/auth-context';
+import { UserAuth } from '../store/auth-context';
 import { SavedMovieType } from '../models/movie';
 import LoadingSpinner from './UI/LoadingSpinner';
 import axios from 'axios';
@@ -15,7 +15,7 @@ type PropsType = {
 const SavedMovies = ({ onOpen }: PropsType) => {
   const [movies, setMovies] = useState<SavedMovieType[]>([]);
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = UserAuth();
 
   const movieRef = doc(db, 'users', `${user?.email}`);
 
@@ -46,7 +46,7 @@ const SavedMovies = ({ onOpen }: PropsType) => {
     } catch (error) {
       console.log(error);
     }
-    
+
     setLoading(false);
   };
 
@@ -78,12 +78,10 @@ const SavedMovies = ({ onOpen }: PropsType) => {
   );
 
   return (
-    <>
-      <section>
-        <h1 className="text-white font-bold text-lg md:text-xl px-4 py-6">My List</h1>
-        {loading ? <LoadingSpinner /> : renderMovies}
-      </section>
-    </>
+    <section>
+      <h1 className="text-white font-bold text-lg md:text-xl px-4 py-6">My List</h1>
+      {loading ? <LoadingSpinner /> : renderMovies}
+    </section>
   );
 };
 

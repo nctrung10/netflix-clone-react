@@ -72,14 +72,14 @@ const NavBar = () => {
         <div className="hidden sm:flex flex-grow items-center text-white">
           <NavLink
             to={user.email ? '/browser' : '/'}
-            className={({ isActive }) => isActive ? 'font-bold' : ''}
+            className={({ isActive }) => isActive ? 'font-bold' : undefined}
             end
           >
             <span className="pr-4">Home</span>
           </NavLink>
           <NavLink
             to='browser/account'
-            className={({ isActive }) => isActive ? 'font-bold' : ''}
+            className={({ isActive }) => isActive ? 'font-bold' : undefined}
           >
             <span className="pr-4">My List</span>
           </NavLink>

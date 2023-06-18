@@ -177,7 +177,7 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
         </div>
         <div className="absolute w-auto bottom-12 px-8 hidden lg:block">
           <div className="mt-5 text-sm">
-            <Link to={`watch/${movie?.id}`} state={movie} onClick={onClose}>
+            <Link to={`browser/watch/${movie?.id}`} state={movie} onClick={onClose}>
               <button className="bg-white text-black rounded-sm font-bold px-5 py-2">
                 <MdPlayArrow className="inline-block mr-2 mb-1 scale-[2]" />
                 Play
@@ -202,7 +202,7 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
         </div>
 
         <div className="block lg:hidden">
-          <Link to={`watch/${movie?.id}`} state={movie} onClick={onClose}>
+          <Link to={`browser/watch/${movie?.id}`} state={movie} onClick={onClose}>
             <button className="w-full bg-white text-black rounded-sm font-bold py-2">
               <MdPlayArrow className="inline-block mr-2 mb-1 scale-[2]" />
               Play

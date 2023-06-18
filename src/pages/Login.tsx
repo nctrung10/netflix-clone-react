@@ -5,9 +5,11 @@ import useInput from '../hooks/use-input';
 import { UserAuth } from '../store/auth-context';
 import Footer from '../components/Footer';
 import { validateEmail, validatePassword } from '../utils/validation';
+import { CgSpinner } from 'react-icons/cg';
 
 const Login = () => {
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { user, signIn } = UserAuth();
   const navigate = useNavigate();
   const {
@@ -36,17 +38,27 @@ const Login = () => {
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
+
+    setLoading(true);
     setError(null);
 
     if (!formIsValid) return;
 
     try {
       await signIn(email, password);
-      navigate('/');
+      navigate('/browser');
     } catch (error: any) {
       setError(error.message.slice(10));
     }
+
+    setLoading(false);
   };
+
+  const submitBtn = loading ? (
+    <>
+      <CgSpinner className="animate-spin h-6 w-6 mr-2" /> Processing...
+    </>
+  ) : 'Sign In';
 
   return (
     <div className="w-full h-screen">
@@ -89,9 +101,9 @@ const Login = () => {
               </div>
               <button
                 className="flex items-center justify-center bg-[#e50914] font-bold h-12 rounded p-4 mt-6 mb-3 disabled:bg-red-400 disabled:cursor-not-allowed"
-                disabled={!formIsValid}
+                disabled={!formIsValid || loading}
               >
-                Sign In
+                {submitBtn}
               </button>
 
               <div className="flex items-center justify-between text-[13px] text-gray-400">

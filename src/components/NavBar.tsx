@@ -13,7 +13,7 @@ const NavBar = () => {
   const logoutHandler = () => {
     if (window.confirm('Do you want to log out?')) {
       logOut();
-      navigate('/login');
+      navigate('/');
     }
   };
 
@@ -36,7 +36,7 @@ const NavBar = () => {
       <div className="absolute top-8 right-0 w-[180px] rounded hidden group-hover:flex flex-col items-center 
         bg-black text-white/70 font-semibold text-sm">
         <span className="block absolute -top-3 w-full h-4" aria-hidden="true"></span>
-        <Link to='/account'>
+        <Link to='browser/account'>
           <button className="py-4">
             <p className="text-xs mb-1">{user?.email}</p>
             Account
@@ -63,7 +63,7 @@ const NavBar = () => {
       ref={navbarRef}
       className="flex items-center justify-between p-4 z-[100] w-full fixed top-0 left-0 bg-gradient-to-b from-black"
     >
-      <a href="/">
+      <a href={user?.email ? '/browser' : '/'}>
         <h1 className="text-[rgb(229,9,20)] text-4xl mr-5 font-bold cursor-pointer select-none">
           NETFLIX
         </h1>
@@ -71,13 +71,14 @@ const NavBar = () => {
       {user?.email && (
         <div className="hidden sm:flex flex-grow items-center text-white">
           <NavLink
-            to='/'
+            to={user.email ? '/browser' : '/'}
             className={({ isActive }) => isActive ? 'font-bold' : ''}
+            end
           >
             <span className="pr-4">Home</span>
           </NavLink>
           <NavLink
-            to='/account'
+            to='browser/account'
             className={({ isActive }) => isActive ? 'font-bold' : ''}
           >
             <span className="pr-4">My List</span>

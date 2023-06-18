@@ -11,6 +11,7 @@ import Account from "./pages/Account";
 import WatchPage from "./pages/Watch";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MovieDetail from "./components/MovieDetail";
+import LandingPage from './pages/Landing';
 import { MovieType } from "./models/movie";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
     setModalIsOpen(false);
     document.body.style.overflow = 'auto';
   }, []);
-  
+
   // const router = createBrowserRouter(
   //   createRoutesFromElements(
   //     <Route>
@@ -44,7 +45,7 @@ function App() {
   //     </Route>
   //   )
   // );
-  
+
   // return (
   //   <AuthContextProvider>
   //     <RouterProvider router={router} />
@@ -54,15 +55,18 @@ function App() {
   return (
     <AuthContextProvider>
       {modalIsOpen && <MovieDetail onClose={closeModalHandler} movie={movie} />}
-      
+
       <Routes>
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<ProtectedRoute><HomePage onOpenModal={openModalHandler} /></ProtectedRoute>} />
-          <Route path="account" element={<ProtectedRoute><Account onOpenModal={openModalHandler} /></ProtectedRoute>} />
+          <Route index element={<LandingPage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="browser">
+            <Route index element={<ProtectedRoute><HomePage onOpenModal={openModalHandler} /></ProtectedRoute>} />
+            <Route path="account" element={<ProtectedRoute><Account onOpenModal={openModalHandler} /></ProtectedRoute>} />
+            <Route path="watch/:movieId" element={<ProtectedRoute><WatchPage /></ProtectedRoute>} />
+          </Route>
         </Route>
-        <Route path="watch/:movieId" element={<ProtectedRoute><WatchPage /></ProtectedRoute>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </AuthContextProvider>

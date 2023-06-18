@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: PropsType) => {
   const { user } = UserAuth();
 
   if (!user) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/' />;
   } else {
     return <>{children}</>;
   }

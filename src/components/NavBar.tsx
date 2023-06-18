@@ -39,7 +39,7 @@ const NavBar = () => {
         <Link to='browser/account'>
           <button className="py-4">
             <p className="text-xs mb-1">{user?.email}</p>
-            Account
+            My list
           </button>
         </Link>
         <button className="hover:text-red-500 py-4 w-full border-t" onClick={logoutHandler}>

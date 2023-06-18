@@ -121,8 +121,8 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
   const infoMovie = (
     <>
       <h1 className="text-lg sm:text-xl mb-2 font-bold">{movie?.title}</h1>
-      <div className="flex flex-col sm:flex-row w-full">
-        <div className="mb-1 sm:mb-0">
+      <div className="w-full">
+        <div className="mb-1 inline-block">
           {movie!.release_date.slice(0, 7) >= '2023-04' && <span className="mr-2 text-green-600">New</span>}
           <span>{movie?.release_date}</span>
           {movie?.adult
@@ -131,7 +131,7 @@ const MovieDetail = ({ movie, onClose }: PropsType) => {
           }
           <span className="mx-2">{runtime > 0 && `${Math.floor(runtime / 60)}h${runtime % 60}m`}</span>
         </div>
-        <div>
+        <div className="inline-block">
           {genres.map(item => (
             <span key={item.id} className="text-xs text-white/50 px-2 first:pl-0 border-r border-white/50 last:border-none">{item.name}</span>
           ))}
